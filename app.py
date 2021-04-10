@@ -95,3 +95,6 @@ def end():
             filter(measurement.station).all().\
             filter(measurement.date >= {s_date}, (measurement.date <= {e_date})).all()
     return jsonify({'error': f'Date range {start} not found.'})
+
+if __name__ == "__main__":
+    app.run(debug=True)
