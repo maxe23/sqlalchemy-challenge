@@ -78,3 +78,11 @@ def tobs():
         filter(measurement.station == 'USC00519281').\
         filter(measurement.date >= year).all()
     return jsonify(tobs)
+
+@app.route("/api/v1.0/<start>")
+def start():
+    date = input(f'Choose a start date (YYYY-MM-DD): ')
+    start_temp = session.query(measurement.date, measurement.tobs).\
+            filter(measurement.station == 'USC00519281').\
+            filter(measurement.date >= {date}).all()
+    return jsonify(start_temp)
