@@ -49,3 +49,23 @@ def home():
     f"- Given the start date (YYYY-MM-DD) returns the min, max, and avg temps for days after the given start date<br/>"
     f"/api/v1.0/<start>/<end><br/>"
     f"- Given a start and end date (YYYY-MM-DD) returns the min, max, and avg temps for dates between the given start and end date<br/>")
+
+@app.route("/api/v1.0/precipitation")
+def precipitation():
+    year = dt.date(2017,8,23) - dt.timedelta(days=365)
+
+    p_year = session.query(measurement.date, (measurement.prcp)).\
+                    filter(measurement.date >= year).all()
+
+    rain_totals = []
+    for row in p_year:
+        row = {}
+        row['date'] = p_year[0]
+        row['pcrp'] = p_year[1]
+        rain_totals.append(row)
+
+    return jsonify(rain_totals)
+
+
+
+
