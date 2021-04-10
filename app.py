@@ -35,3 +35,17 @@ app = Flask(__name__)
 #################################################
 # Flask Routes
 #################################################
+
+@app.route("/")
+def home():
+    return (f"Available Routes: <br/>"
+    f"/api/v1.0/precipitation<br/>"
+    f"- Precipitation results by date <br/>"
+    f"/api/v1.0/stations<br/>"
+    f"- Weather Stations<br/>"
+    f"/api/v1.0/tobs<br/>"
+    f"-Temperature Observations<br/>"
+    f"/api/v1.0/<start><br/>"
+    f"- Given the start date (YYYY-MM-DD) returns the min, max, and avg temps for days after the given start date<br/>"
+    f"/api/v1.0/<start>/<end><br/>"
+    f"- Given a start and end date (YYYY-MM-DD) returns the min, max, and avg temps for dates between the given start and end date<br/>")
