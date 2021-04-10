@@ -86,3 +86,12 @@ def start():
             filter(measurement.station == 'USC00519281').\
             filter(measurement.date >= {date}).all()
     return jsonify(start_temp)
+
+@app.route("/api/v1.0/<start><end>")
+def end():
+    s_date = input(f'Choose a start date (YYYY-MM-DD): ')
+    e_date = input(f'Choose an end date (YYYY-MM-DD): ')
+    start = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).\
+            filter(measurement.station).all().\
+            filter(measurement.date >= {s_date}, (measurement.date <= {e_date})).all()
+    return jsonify({'error': f'Date range {start} not found.'})
