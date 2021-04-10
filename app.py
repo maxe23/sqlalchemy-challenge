@@ -66,6 +66,9 @@ def precipitation():
 
     return jsonify(rain_totals)
 
-
+@app.route("/api/v1.0/stations")
+def stations():
+    stations = session.query(station.station).all()
+    return jsonify(stations)
 
 
